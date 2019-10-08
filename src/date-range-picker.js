@@ -104,7 +104,10 @@ export function DateRangePicker(container, opts) {
     }
 
     emitter.emit('statechange', me);
-    rerender();
+    start.setState({
+      hilightedDate: state.end
+    });
+    end.setState({});
   }
 
   function rerender() {

@@ -252,7 +252,9 @@
 
       inRange: function () {
         return true;
-      }
+      },
+
+      appendTo: document.body,
     };
   }
 
@@ -671,7 +673,7 @@
       containerHTML: '<div class="dp"></div>',
 
       attachToDom: function () {
-        document.body.appendChild(dp.el);
+        opts.appendTo.appendChild(dp.el);
       },
 
       updateInput: function (selectedDate) {
@@ -1023,7 +1025,6 @@
     var dp = BaseMode(root, emit, opts);
 
     dp.close = noop;
-    dp.destroy = noop;
     dp.updateInput = noop;
     dp.shouldFocusOnRender = opts.shouldFocusOnRender;
 
@@ -1297,7 +1298,10 @@
       }
 
       emitter.emit('statechange', me);
-      rerender();
+      start.setState({
+        hilightedDate: state.end
+      });
+      end.setState({});
     }
 
     function rerender() {
